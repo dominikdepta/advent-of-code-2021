@@ -13,14 +13,9 @@ async function main() {
 
   try {
     for await (const line of fileLines) {
-      if (!prevValue) {
-        prevValue = line;
-      } else {
-        prevValue = currValue;
-        currValue = line;
-      }
-
-      result = result + (prevValue < currValue);
+      prevValue = prevValue ? Number(currValue) : Number(line);
+      currValue = Number(line);
+      result += prevValue < currValue;
     }
   } catch (e) {
     console.error(e);
